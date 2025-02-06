@@ -1,16 +1,14 @@
 pipeline {
     agent { label 'jenkins-slave' }  // Runs on the slave node
     parameters {
-        choice(name: 'ENV_GROUP', choices: ['main','dev'], description: 'Environment to deploy the VMs')
-        booleanParam(name: 'GENERATE_DOCS', defaultValue: false, description: 'Should the docs be generated?')
-        booleanParam(name: 'ONLY_ENV', defaultValue: false, description: 'Only update secrets?')
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Enter the branch to build')
     }
 
 
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-org/your-repo.git'
+                git branch: "${params.BRANCH_NAME}", url: 'https://github.com/your-org/your-repo.git'
             }
         }
 
