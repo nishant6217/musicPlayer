@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'jenkins-slave' }  // Runs on the slave node
     parameters {
-        choice(name: 'ENV_GROUP', choices: ['dev'], description: 'Environment to deploy the VMs')
+        choice(name: 'ENV_GROUP', choices: ['main','dev'], description: 'Environment to deploy the VMs')
         booleanParam(name: 'GENERATE_DOCS', defaultValue: false, description: 'Should the docs be generated?')
         booleanParam(name: 'ONLY_ENV', defaultValue: false, description: 'Only update secrets?')
     }
